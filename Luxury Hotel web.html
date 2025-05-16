@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium | Luxury Hotel & Resorts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        nav.scrolled {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px 5%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 1px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .book-btn {
+            background-color: var(--gold);
+            color: var(--dark);
+            padding: 12px 25px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .book-btn:hover {
+            background-color: transparent;
+            color: var(--gold);
+            outline: 1px solid var(--gold);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .explore-btn {
+            background-color: transparent;
+            color: white;
+            padding: 15px 30px;
+            border: 1px solid white;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .explore-btn:hover {
+            background-color: white;
+            color: var(--dark);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 10%;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        
+        .about-img {
+            flex: 1;
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .about-content h2 {
+            font-size: 42px;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .signature {
+            font-family: 'Parisienne', cursive;
+            font-size: 24px;
+            color: var(--gold);
+        }
+        
+        /* Rooms Section */
+        .rooms {
+            padding: 100px 10%;
+            background-color: #f5f5f5;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .room-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .room-card {
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .room-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .room-content {
+            padding: 30px;
+        }
+        
+        .room-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .room-content p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .room-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-size: 24px;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        
+        /* Amenities */
+        .amenities {
+            padding: 100px 10%;
+            background: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover fixed;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+        
+        .amenities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .amenities-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .amenity-item {
+            padding: 40px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .amenity-item:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+        
+        .amenity-icon {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .amenity-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .amenity-item p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 10%;
+            background-color: white;
+        }
+        
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -20px;
+            left: -15px;
+        }
+        
+        .guest-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .guest-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .guest-details h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .guest-details p {
+            color: var(--gold);
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 10% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 1px;
+            background-color: var(--gold);
+        }
+        
+        .footer-col p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links li {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #aaa;
+        }
+        
+        .contact-icon {
+            color: var(--gold);
+            margin-top: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about {
+                flex-direction: column;
+            }
+            
+            .about-img {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Elysium</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Rooms & Suites</a>
+            <a href="#">Dining</a>
+            <a href="#">Experiences</a>
+            <a href="#">Gallery</a>
+            <a href="#">Contact</a>
+        </div>
+        <button class="book-btn">Book Now</button>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Where Luxury Meets Serenity</h1>
+        <p>Discover an oasis of elegance and impeccable service at Elysium, where every detail is crafted to perfection for an unforgettable experience.</p>
+        <div class="hero-btns">
+            <button class="explore-btn">Explore More</button>
+            <button class="book-btn">Book Your Stay</button>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-img"></div>
+        <div class="about-content">
+            <span class="section-title">About Us</span>
+            <h2>Redefining Luxury Hospitality Since 1985</h2>
+            <p>Nestled in the heart of pristine landscapes, Elysium stands as a testament to timeless elegance and unparalleled service. Our legacy of hospitality spans decades, offering guests a sanctuary where every need is anticipated and every moment is cherished.</p>
+            <p>From our hand-selected furnishings to our Michelin-starred dining experiences, we commit to excellence in every detail, ensuring your stay transcends the ordinary and becomes truly extraordinary.</p>
+            <p class="signature">Claude Monet</p>
+            <p>General Manager</p>
+        </div>
+    </section>
+    
+    <!-- Rooms Section -->
+    <section class="rooms">
+        <div class="section-header">
+            <span class="section-title">Accommodations</span>
+            <h2>Exquisite Rooms & Suites</h2>
+            <p>Each of our accommodations is a masterpiece of design, blending contemporary luxury with classic elegance to create spaces that are both inviting and awe-inspiring.</p>
+        </div>
+        <div class="room-cards">
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div class="room-content">
+                    <h3>Deluxe Room</h3>
+                    <p>Spacious sanctuary with panoramic views, featuring a king-size bed, marble bathroom, and state-of-the-art technology.</p>
+                    <div class="room-price">
+                        <span>From</span>
+                        <span class="price">$450/night</span>
+                    </div>
+                </div>
+            </div>
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1566669437685-2c5a585fac3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div class="room-content">
+                    <h3>Executive Suite</h3>
+                    <p>Expansive living area, separate bedroom, and breathtaking views, complemented by personalized butler service.</p>
+                    <div class="room-price">
+                        <span>From</span>
+                        <span class="price">$850/night</span>
+                    </div>
+                </div>
+            </div>
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719471383-331366cb7107?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div class="room-content">
+                    <h3>Presidential Suite</h3>
+                    <p>The pinnacle of luxury with multiple bedrooms, private terrace, and exclusive access to our VIP amenities.</p>
+                    <div class="room-price">
+                        <span>From</span>
+                        <span class="price">$2,500/night</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Amenities -->
+    <section class="amenities">
+        <div class="amenities-content">
+            <span class="section-title">Experience</span>
+            <h2>Unparalleled Amenities</h2>
+            <p>Beyond exceptional accommodations, Elysium offers world-class amenities designed to indulge your senses and elevate your stay.</p>
+            <div class="amenities-grid">
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Luxury Spa</h3>
+                    <p>Our award-winning spa offers bespoke treatments using only the finest products to rejuvenate mind, body, and soul.</p>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Gourmet Dining</h3>
+                    <p>Three Michelin-starred restaurants featuring world-renowned chefs and an extensive wine cellar with rare vintages.</p>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Infinity Pool</h3>
+                    <p>A breathtaking horizon-edge pool with panoramic views, private cabanas, and dedicated poolside service.</p>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Wellness Center</h3>
+                    <p>State-of-the-art fitness facilities with personal trainers, yoga pavilion, and holistic wellness programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <span class="section-title">Testimonials</span>
+            <h2>What Our Guests Say</h2>
+            <p>The true measure of our success is the satisfaction of our guests. Here's what some of our valued visitors have shared about their Elysium experience.</p>
+        </div>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    Our stay at Elysium was nothing short of magical. From the moment we arrived, every detail was perfect. The staff anticipated our every need, and the suite was exquisite.
+                </div>
+                <div class="guest-info">
+                    <div class="guest-img" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+                    <div class="guest-details">
+                        <h4>Sarah Johnson</h4>
+                        <p>New York, USA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    The level of service at Elysium redefines luxury. We've stayed at five-star hotels worldwide, but none compare to the attention to detail and genuine care shown here.
+                </div>
+                <div class="guest-info">
+                    <div class="guest-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+                    <div class="guest-details">
+                        <h4>Michael Chen</h4>
+                        <p>Hong Kong</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    Celebrating our anniversary at Elysium was the best decision we made. The romantic dinner on our private terrace will forever be one of our most cherished memories.
+                </div>
+                <div class="guest-info">
+                    <div class="guest-img" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+                    <div class="guest-details">
+                        <h4>Emily & James Wilson</h4>
+                        <p>London, UK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>About Elysium</h3>
+                <p>Elysium stands as a beacon of luxury hospitality, offering unparalleled service and exquisite accommodations in the world's most desirable locations.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Rooms & Suites</a></li>
+                    <li><a href="#">Dining</a></li>
+                    <li><a href="#">Spa & Wellness</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <span>123 Luxury Avenue, Resort City, RC 10001</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <span>reservations@elysium.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for exclusive offers and updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                    <button type="submit" class="book-btn" style="width: 100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Elysium Luxury Hotels & Resorts. All Rights Reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
